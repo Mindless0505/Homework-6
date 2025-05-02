@@ -5,7 +5,7 @@ public class MorseTree<T>{
     private MorseTree<String> root;
 
     public MorseTree(){
-        this.element=null;
+        this.element="empty";
     }
 
     public MorseTree(String element){
@@ -22,6 +22,10 @@ public class MorseTree<T>{
 
     public MorseTree<String> getRight(){
         return right;
+    }
+
+    public MorseTree<String> getRoot(){
+        return root;
     }
 
     public void setElement(String element){
@@ -66,21 +70,6 @@ public class MorseTree<T>{
     }
 
 
-    //O(n)   null node = -1; Leaf node= 0; Anything else: 1 + max of tree
-    public int height(){
-        if (left == null && right==null){
-            return 0;
-        }
-        else if (left !=null && right==null){
-            return 1+ this.getLeft().height();
-        }
-        else if(left ==null && right!=null){
-            return 1+ this.getRight().height();
-        }
-        else{
-            return 1 +Math.max(this.getLeft().height(), this.getRight().height());
-        }
-    }
 
 
     public void insertLeft(String element){
@@ -160,51 +149,48 @@ public class MorseTree<T>{
     //     return element.toString();
     // }
 
-    public String EnglishToMorse(String letter, MorseTree<String> temprootM){
-        String OutputM="";
-        
-        if (temprootM.getElement().equals(letter)){
-            return letter;
-        }
-        else{
-            if (temprootM.getRight() != null && temprootM.getLeft() != null){
-                return temprootM.getLeft().EnglishToMorse(letter,temprootM.getLeft()) temprootM.getRight().EnglishToMorse(letter,temprootM.getRight());
-            }
-            else if (temprootM.getRight() == null && temprootM.getLeft() != null){
-                return temprootM.getLeft().isIn(target);
-            }
-            else if (temprootM.getRight() != null && temprootM.getLeft() == null){
-                return temprootM.getRight().isIn(target);
-            }
-            else{
 
-        }
-    }
 
-    public String englishToMorse(String s, MorseTree t) {
+    public String englishToMorse(String letter, MorseTree<String> temprootM) {
 
-        if (this.getLeft() != null && this.getLeft().getRoot().equals(s)) {
+        if (this.getLeft() != null && this.getLeft().getRoot().equals(letter)) {
 
             return " o ";
 
-        } else if (this.getRight() != null && this.getRight().getRoot().equals(s)) {
+        } else if (this.getRight() != null && this.getRight().getRoot().equals(letter)) {
 
             return " - ";
 
         } else {
 
-            if (this.getLeft() != null && !(this.getLeft().englishToMorse(s, t.getLeft()).equals(""))) {
+            if (this.getLeft() != null && !(this.getLeft().englishToMorse(letter, temprootM.getLeft()).equals(""))) {
 
-                return " o " + this.getLeft().englishToMorse(s, t.getLeft());
+                return " o " + this.getLeft().englishToMorse(letter, temprootM.getLeft());
 
-            } else if (this.getRight() != null && !(this.getRight().englishToMorse(s, t.getRight()).equals(""))) {
+            } else if (this.getRight() != null && !(this.getRight().englishToMorse(letter, temprootM.getRight()).equals(""))) {
 
-                return " - " + this.getRight().englishToMorse(s, t.getRight());
+                return " - " + this.getRight().englishToMorse(letter, temprootM.getRight());
 
             }
 
             return "";
         }
+    }
+
+    public String wordRunner(String english){
+        String output="";
+        for(int i=0; i<english.length();i++){
+            // if (morse.charAt(i)==' '){
+            
+            // }
+            if (english.charAt(i)!=' '){
+               output=""+englishToMorse((english.charAt(i) +""),root);
+
+            }
+
+
+        }
+        return output;
     }
 
 
