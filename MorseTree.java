@@ -1,20 +1,20 @@
 public class MorseTree<T>{
-    private String element;
     private MorseTree<String> left;
     private MorseTree<String> right;
-    private MorseTree<String> root;
+    private String root;
 
     public MorseTree(){
-        this.element="empty";
-        this.root.setElement("element");;
+        this.root="";
+        this.left=null;
+        this.right=null;
     }
-
+    
     public MorseTree(String element){
-        this.element=element;
+        this.root=element;
     }
 
     public String getElement(){
-        return element;
+        return root;
     }
 
     public MorseTree<String> getLeft(){
@@ -25,12 +25,9 @@ public class MorseTree<T>{
         return right;
     }
 
-    public MorseTree<String> getRoot(){
-        return root;
-    }
 
     public void setElement(String element){
-        this.element=element;
+        this.root=element;
     }
 
     public void setRight(MorseTree<String> right){
@@ -40,37 +37,6 @@ public class MorseTree<T>{
     public void setLeft(MorseTree<String> left){
         this.left=left;
     }
-
-
-
-    // public void inorder(MorseTree<String> node){
-    //     if (node==null){
-    //         return;
-    //     }
-    //     inorder(node.getLeft());
-    //     System.out.println(node.getElement());
-    //     inorder(node.getRight());
-    // }
-
-    public void preorder(MorseTree<String> node){
-        if (node==null){
-            return;
-        }
-        System.out.println(node.getElement());
-        preorder(node.getLeft());
-        preorder(node.getRight());
-    }
-
-    public void postorder(MorseTree<String> node){
-        if (node==null){
-            return;
-        }
-        postorder(node.getLeft());
-        postorder(node.getRight());
-        System.out.println(node.getElement());
-    }
-
-
 
 
     public void insertLeft(String element){
@@ -92,23 +58,42 @@ public class MorseTree<T>{
     }
 
 
+    public void preorder(MorseTree<String> node){
+        if (node==null){
+            return;
+        }
+        System.out.println(node.getElement());
+        preorder(node.getLeft());
+        preorder(node.getRight());
+    }
+
+    public void postorder(MorseTree<String> node){
+        if (node==null){
+            return;
+        }
+        postorder(node.getLeft());
+        postorder(node.getRight());
+        System.out.println(node.getElement());
+    }
+
+
     //  - | o o o o | o | - - o - | o o - | o o | - o – o | - o - | o o – o | - - - | - o o - |
     public String morseToEnglish(String morse){
         String output="";
-        MorseTree<String> roottemp=root;
+        MorseTree roottemp=this;
         for(int i=0; i<morse.length();i++){
             // if (morse.charAt(i)==' '){
             
             // }
             if (morse.charAt(i)=='-'){
-                roottemp=root.getRight();
+                roottemp=roottemp.getRight();
             }
             else if (morse.charAt(i)=='o'){
-                roottemp=root.getLeft();
+                roottemp=roottemp.getLeft();
             }
             else if (morse.charAt(i)=='|'){
                 output= output+roottemp.getElement();
-                roottemp=root;
+                roottemp=this;
             }
 
         }
@@ -117,45 +102,45 @@ public class MorseTree<T>{
 
 
     public void fillTree(){
-        root.setElement("");
-        root.insertLeft("e");
-        root.insertRight("t");
-        root.getLeft().insertLeft("i");
-        root.getLeft().insertRight("a");
-        root.getRight().insertLeft("n");
-        root.getRight().insertRight("m");
-        root.getLeft().getLeft().insertLeft("s");
-        root.getLeft().getLeft().insertRight("u");
-        root.getLeft().getRight().insertLeft("r");
-        root.getLeft().getRight().insertRight("w");
-        root.getRight().getLeft().insertLeft("d");
-        root.getRight().getLeft().insertRight("k");
-        root.getRight().getRight().insertLeft("g");
-        root.getRight().getRight().insertRight("o");
-        root.getLeft().getLeft().getLeft().insertLeft("h");
-        root.getLeft().getLeft().getLeft().insertRight("v");
-        root.getLeft().getLeft().getRight().insertLeft("f");
-        root.getLeft().getRight().getLeft().insertLeft("l");
-        root.getLeft().getRight().getRight().insertLeft("p");
-        root.getLeft().getRight().getRight().insertRight("j");
-        root.getRight().getLeft().getLeft().insertLeft("b");
-        root.getRight().getLeft().getLeft().insertRight("x");
-        root.getRight().getLeft().getRight().insertLeft("c");
-        root.getRight().getLeft().getRight().insertRight("y");
-        root.getRight().getRight().getLeft().insertLeft("z");
-        root.getRight().getRight().getLeft().insertRight("q");
+        this.setElement("");
+        this.insertLeft("e");
+        this.insertRight("t");
+        this.getLeft().insertLeft("i");
+        this.getLeft().insertRight("a");
+        this.getRight().insertLeft("n");
+        this.getRight().insertRight("m");
+        this.getLeft().getLeft().insertLeft("s");
+        this.getLeft().getLeft().insertRight("u");
+        this.getLeft().getRight().insertLeft("r");
+        this.getLeft().getRight().insertRight("w");
+        this.getRight().getLeft().insertLeft("d");
+        this.getRight().getLeft().insertRight("k");
+        this.getRight().getRight().insertLeft("g");
+        this.getRight().getRight().insertRight("o");
+        this.getLeft().getLeft().getLeft().insertLeft("h");
+        this.getLeft().getLeft().getLeft().insertRight("v");
+        this.getLeft().getLeft().getRight().insertLeft("f");
+        this.getLeft().getRight().getLeft().insertLeft("l");
+        this.getLeft().getRight().getRight().insertLeft("p");
+        this.getLeft().getRight().getRight().insertRight("j");
+        this.getRight().getLeft().getLeft().insertLeft("b");
+        this.getRight().getLeft().getLeft().insertRight("x");
+        this.getRight().getLeft().getRight().insertLeft("c");
+        this.getRight().getLeft().getRight().insertRight("y");
+        this.getRight().getRight().getLeft().insertLeft("z");
+        this.getRight().getRight().getLeft().insertRight("q");
         }
 
 
 
 
-    public String englishToMorse(String letter, MorseTree<String> temprootM) {
+    public String englishToMorse(String letter, MorseTree<T> temprootM) {
 
-        if (this.getLeft() != null && this.getLeft().getRoot().equals(letter)) {
+        if (this.getLeft() != null && this.getLeft().getElement().equals(letter)) {
 
             return " o ";
 
-        } else if (this.getRight() != null && this.getRight().getRoot().equals(letter)) {
+        } else if (this.getRight() != null && this.getRight().getElement().equals(letter)) {
 
             return " - ";
 
@@ -182,7 +167,7 @@ public class MorseTree<T>{
             
             // }
             if (english.charAt(i)!=' '){
-               output=""+englishToMorse((english.charAt(i) +""),root);
+               output=""+englishToMorse((english.charAt(i) +""),this);
 
             }
 
