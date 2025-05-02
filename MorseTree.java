@@ -6,6 +6,7 @@ public class MorseTree<T>{
 
     public MorseTree(){
         this.element="empty";
+        this.root.setElement("element");;
     }
 
     public MorseTree(String element){
@@ -145,9 +146,6 @@ public class MorseTree<T>{
         root.getRight().getRight().getLeft().insertRight("q");
         }
 
-    // public String toString(){
-    //     return element.toString();
-    // }
 
 
 
