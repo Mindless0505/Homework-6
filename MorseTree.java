@@ -4,6 +4,10 @@ public class MorseTree<T>{
     private MorseTree<String> right;
     private MorseTree<String> root;
 
+    public MorseTree(){
+        this.element=null;
+    }
+
     public MorseTree(String element){
         this.element=element;
     }
@@ -177,31 +181,31 @@ public class MorseTree<T>{
         }
     }
 
+    public String englishToMorse(String s, MorseTree t) {
 
-    public boolean isIn(T target){
-        if (this.getElement().equals(target)){
-            return true;
-        }
-        else if (this.getLeft() == null && this.getRight() == null){
-            return false;
-        }
-        else{
-            if (this.getRight() != null && this.getLeft() != null){
-                return this.getLeft().isIn(target) || this.getRight().isIn(target);
+        if (this.getLeft() != null && this.getLeft().getRoot().equals(s)) {
+
+            return " o ";
+
+        } else if (this.getRight() != null && this.getRight().getRoot().equals(s)) {
+
+            return " - ";
+
+        } else {
+
+            if (this.getLeft() != null && !(this.getLeft().englishToMorse(s, t.getLeft()).equals(""))) {
+
+                return " o " + this.getLeft().englishToMorse(s, t.getLeft());
+
+            } else if (this.getRight() != null && !(this.getRight().englishToMorse(s, t.getRight()).equals(""))) {
+
+                return " - " + this.getRight().englishToMorse(s, t.getRight());
+
             }
-            else if (this.getRight() == null && this.getLeft() != null){
-                return this.getLeft().isIn(target);
-            }
-            else if (this.getRight() != null && this.getLeft() == null){
-                return this.getRight().isIn(target);
-            }
-            else{
-                return false;
-            }
+
+            return "";
         }
     }
-
-
 
 
 }
