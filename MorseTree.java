@@ -167,7 +167,7 @@ public class MorseTree<T>{
             
             // }
             if (english.charAt(i)!=' '){
-               output=""+englishToMorse((english.charAt(i) +""),this);
+               output+=englishToMorse((english.charAt(i) +""),this)+"| ";
 
             }
 

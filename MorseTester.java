@@ -5,6 +5,6 @@ public class MorseTester {
         T1.preorder(T1);
         T1.postorder(T1);
         System.out.println(T1.wordRunner("the quick fox"));
-        System.out.println(T1.morseToEnglish(" - | o o o o | o | - - o - | o o - | o o | - o - o | - o - | o o - o | - - - | - o o - |"));
+        System.out.println(T1.morseToEnglish(" - |  o  o  o  o |  o |  -  -  o  - |  o  o  - |  o  o |  -  o  -  o |  -  o  - |  o  o  -  o |  -  -  - |  -  o  o  - |"));
 }
 }
