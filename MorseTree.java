@@ -1,4 +1,4 @@
-public class MorseTree<String>{
+public class MorseTree<T>{
     private String element;
     private MorseTree<String> left;
     private MorseTree<String> right;
@@ -34,14 +34,14 @@ public class MorseTree<String>{
 
 
 
-    public void inorder(MorseTree<String> node){
-        if (node==null){
-            return;
-        }
-        inorder(node.getLeft());
-        System.out.println(node.getElement());
-        inorder(node.getRight());
-    }
+    // public void inorder(MorseTree<String> node){
+    //     if (node==null){
+    //         return;
+    //     }
+    //     inorder(node.getLeft());
+    //     System.out.println(node.getElement());
+    //     inorder(node.getRight());
+    // }
 
     public void preorder(MorseTree<String> node){
         if (node==null){
@@ -101,18 +101,24 @@ public class MorseTree<String>{
     //  - | o o o o | o | - - o - | o o - | o o | - o – o | - o - | o o – o | - - - | - o o - |
     public String morseToEnglish(String morse){
         String output="";
-        String letTemp="";
+        MorseTree<String> roottemp=root;
         for(int i=0; i<morse.length();i++){
-            if (morse.charAt(i)==' '){
-                i++;
+            // if (morse.charAt(i)==' '){
+            
+            // }
+            if (morse.charAt(i)=='-'){
+                roottemp=root.getRight();
             }
-            else if (morse.charAt(i)=='-'){
-                letTemp=root.getLeft();
+            else if (morse.charAt(i)=='o'){
+                roottemp=root.getLeft();
             }
-
+            else if (morse.charAt(i)=='|'){
+                output= output+roottemp.getElement();
+                roottemp=root;
+            }
 
         }
-
+        return output;
     }
 
 
@@ -146,11 +152,54 @@ public class MorseTree<String>{
         root.getRight().getRight().getLeft().insertRight("q");
         }
 
-    public String toString(){
-        return element.toString();
+    // public String toString(){
+    //     return element.toString();
+    // }
+
+    public String EnglishToMorse(String letter, MorseTree<String> temprootM){
+        String OutputM="";
+        
+        if (temprootM.getElement().equals(letter)){
+            return letter;
+        }
+        else{
+            if (temprootM.getRight() != null && temprootM.getLeft() != null){
+                return temprootM.getLeft().EnglishToMorse(letter,temprootM.getLeft()) temprootM.getRight().EnglishToMorse(letter,temprootM.getRight());
+            }
+            else if (temprootM.getRight() == null && temprootM.getLeft() != null){
+                return temprootM.getLeft().isIn(target);
+            }
+            else if (temprootM.getRight() != null && temprootM.getLeft() == null){
+                return temprootM.getRight().isIn(target);
+            }
+            else{
+
+        }
     }
 
 
+    public boolean isIn(T target){
+        if (this.getElement().equals(target)){
+            return true;
+        }
+        else if (this.getLeft() == null && this.getRight() == null){
+            return false;
+        }
+        else{
+            if (this.getRight() != null && this.getLeft() != null){
+                return this.getLeft().isIn(target) || this.getRight().isIn(target);
+            }
+            else if (this.getRight() == null && this.getLeft() != null){
+                return this.getLeft().isIn(target);
+            }
+            else if (this.getRight() != null && this.getLeft() == null){
+                return this.getRight().isIn(target);
+            }
+            else{
+                return false;
+            }
+        }
+    }
 
 
 
